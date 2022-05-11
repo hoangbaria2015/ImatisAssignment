@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Ordinal</th>
+      <th scope="col">Customer</th>
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let promotion of promotions; let i = index" >
+      <td>{{ i + 1 }}</td>
+      <td>{{ promotion.customer?.name }}</td>
+      <td><button type="button" class="btn btn-primary"  [routerLink]="'/promotion/edit/' + promotion.id">Edit</button></td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary"  routerLink="/promotion/create">Add new promotion</button>

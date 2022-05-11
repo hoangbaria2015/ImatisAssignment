@@ -1,0 +1,43 @@
+<form style="width: 50%">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Customer</label>
+    <select class="form-select" [(ngModel)]="promotion.customerId" name="customer" id="customer">
+      <option *ngFor="let customer of customers" [value]="customer.id" >{{ customer.name }}</option>
+    </select>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="addEmployeePackage()">Add Package</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Package</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employeePackage of promotion?.employeePackages;let i = index">
+        <td>
+          <select class="form-select" [(ngModel)]="employeePackage.packageId" (ngModelChange)="calculateAmount(employeePackage)" [name]="'package'+i" [id]="'package'+i">
+            <option *ngFor="let package of packages" [value]="package.id" >{{ package.name }}</option>
+          </select>
+        </td>
+        <td><input
+          style="width: 50%;"
+          [(ngModel)]="employeePackage.quantity"
+          (ngModelChange)="calculateAmount(employeePackage)"
+          type="number"
+          class="form-control"
+          [id]="'employeePackageQuantity' + i"
+          [name]="'employeePackageQuantity' + i"
+        /></td>
+        <td>{{ employeePackage.amount }}</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>{{ totalQuantity }}</td>
+        <td>{{ totalAmount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+<button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
