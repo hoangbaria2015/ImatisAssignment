@@ -6,6 +6,8 @@ public class GetEmployeePackageForViewDto
 {
     public Guid Id { get; set; }
     
+    public Guid PackageId { get; set; }
+    
     public Package Package { get; set; }
 
     public int Quantity { get; set; }

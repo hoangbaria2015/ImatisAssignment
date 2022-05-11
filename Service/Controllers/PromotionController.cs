@@ -45,6 +45,24 @@ public class PromotionController : ControllerBase
         return entity.Id;
     }
     
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ICollection<GetPromotionForViewDto>>> GetById(Guid id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+        
+        var promotion = await _promotionRepository.GetById(id);
+        
+        if (promotion == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(_mapper.Map<GetPromotionForViewDto>(promotion));
+    }
+    
     private async Task<Promotion> Update(CreateUpdatePromotionDto input)
     {
         await _promotionRepository.RemovePackageOfPromotion(input.Id);

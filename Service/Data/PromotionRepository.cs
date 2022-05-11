@@ -59,6 +59,9 @@ public class PromotionRepository : IPromotionRepository
 
     public async Task<Promotion> GetById(Guid id)
     {
-        return await _context.Promotions.SingleOrDefaultAsync(x => x.Id == id);
+        return await _context.Promotions
+            .Include(x => x.Customer)
+            .Include(x => x.EmployeePackages)
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 }
